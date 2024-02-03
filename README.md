@@ -29,8 +29,8 @@ Mui template
 前端：antd, react, react-router-dom, mui, styled-components
 
 ## 如何在 localhost 安裝與測試之詳細步驟
-複製final資料夾後，進入frontend資料夾打入yarn install，再進入backend資料夾打入yarn install。
-接著要在backend資料夾中加上自己的.env檔，
-最後在final資料夾中打入yarn start開啟前端，打入yarn server開啟後端，
+複製 cafe-finder 資料夾後，進入 frontend 資料夾打入 yarn install，再進入 backend 資料夾打入 yarn install。
+接著要在 backend 資料夾中加上自己的 .env 檔，
+最後在 cafe-finder 資料夾中打入 yarn start 開啟前端，打入 yarn server 開啟後端，
 此時網頁就應該可以正常操作。<br>
-進入網頁後可自行sign up一個帳號，再登入就可以使用所有功能了。
+進入網頁後可自行 sign up 一個帳號，再登入就可以使用所有功能了。
