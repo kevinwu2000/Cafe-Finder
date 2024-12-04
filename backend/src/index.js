@@ -13,6 +13,7 @@ import User from './resolvers/User.js';
 import Restaurant from './resolvers/Restaurant.js';
 import express from "express";
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 mongo.connect();
 
@@ -77,6 +78,9 @@ useServer(
   },
   wsServer,
 )
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Add React app serving for production
 if (process.env.NODE_ENV === 'production') {
