@@ -5,7 +5,7 @@ import {HookProvider} from './container/hooks/Hooks';
 import {ApolloClient, InMemoryCache, ApolloProvider, split, HttpLink} from '@apollo/client';
 
 const httpLink = new HttpLink({
-  uri: 'http://localhost:4000/graphql',
+  uri: '/graphql', // Use relative path for API endpoint
 });
 
 const client = new ApolloClient({

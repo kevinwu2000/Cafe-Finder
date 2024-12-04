@@ -6,26 +6,15 @@ import * as fs from 'fs'
 import * as CryptoJS from 'crypto-js';
 import mongo from './mongo';
 import {UserModel, RestaurantModel} from './models/models';
-//import cors from "cors";
-//import express from "express";
 import Query from './resolvers/Query';
 import Mutation from './resolvers/Mutation';
 import Subscription from './resolvers/Subscription';
 import User from './resolvers/User';
 import Restaurant from './resolvers/Restaurant';
-
-/*const password = 123456;
-const secretKey = "mySecretKey";
-const encrypt = CryptoJS.AES.encrypt(password.toString(),secretKey);
-console.log(encrypt.toString());
-const decrypt = CryptoJS.AES.decrypt(encrypt,secretKey);
-console.log(decrypt.toString(CryptoJS.enc.Utf8));*/
+import express from "express";
+import path from 'path';
 
 mongo.connect();
-
-/*const app = express();
-app.use(cors());
-app.use(express.json());*/
 
 const pubsub = createPubSub();
 
@@ -47,12 +36,6 @@ const yoga = createYoga({
     RestaurantModel,
     pubsub,
   },
-  /*graphqlEndpoint: process.env.NODE_ENV === "production"
-  ? "/api"
-  : "/graphql",   // uncomment this to send the app to: 4000/
-  graphiql: {
-    subscriptionsProtocol: 'WS',
-  },*/
 });
 
 const server = createServer(yoga)
@@ -95,22 +78,16 @@ useServer(
   wsServer,
 )
 
+// Add React app serving for production
+if (process.env.NODE_ENV === 'production') {
+  const buildPath = path.join(__dirname, '../frontend/build');
+  yoga.express.use(express.static(buildPath));
+  yoga.express.get('*', (req, res) => {
+    res.sendFile(path.join(buildPath, 'index.html'));
+  });
+}
+
 const port = process.env.PORT || 4000;
 server.listen({port}, () => {
   console.log(`The server is up on port ${port}!`);
 });
-
-/* 
-import { WebSocketServer } from 'ws'
-const server = createServer(yoga)
-
-const wsServer = new WebSocketServer({
-  server: server,
-  path: yoga.graphqlEndpoint,
-})
-const app = express();
-if(process.env.NODE_DEV == "development")app.use(cors());
-
-const port = process.env.PORT || 4000;
-app.use('/api',wsServer)
-*/

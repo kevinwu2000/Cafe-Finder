@@ -3,8 +3,8 @@
     "start": "cd frontend && yarn start",
     "server": "cd backend && yarn start",
     "install:prod": "cd frontend && yarn install --freeze-lockfile && cd ../backend && yarn install --freeze-lockfile",
-    "build": "cd frontend && yarn build",
-    "deploy": "cd backend && yarn deploy"
+    "build": "cd frontend && yarn build && cd ../backend && yarn start",
+    "deploy": "cd frontend && yarn build"
   },
   "name": "WP_final_project",
   "version": "1.0.0",
