@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "cd backend && yarn start", 
+    "start": "node backend/src/index.js", 
     "build": "cd frontend && yarn build",
     "postinstall": "cd frontend && yarn install --frozen-lockfile && yarn build && cd ../backend && yarn install --frozen-lockfile"
   },
