@@ -5,12 +5,12 @@ import { WebSocketServer } from 'ws'
 import * as fs from 'fs'
 import * as CryptoJS from 'crypto-js';
 import mongo from './mongo.js';
-import {UserModel, RestaurantModel} from './models/models';
-import Query from './resolvers/Query';
-import Mutation from './resolvers/Mutation';
-import Subscription from './resolvers/Subscription';
-import User from './resolvers/User';
-import Restaurant from './resolvers/Restaurant';
+import {UserModel, RestaurantModel} from './models/models.js';
+import Query from './resolvers/Query.js';
+import Mutation from './resolvers/Mutation.js';
+import Subscription from './resolvers/Subscription.js';
+import User from './resolvers/User.js';
+import Restaurant from './resolvers/Restaurant.js';
 import express from "express";
 import path from 'path';
 
