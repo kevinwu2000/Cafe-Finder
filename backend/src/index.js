@@ -4,7 +4,7 @@ import { useServer } from 'graphql-ws/lib/use/ws'
 import { WebSocketServer } from 'ws'
 import * as fs from 'fs'
 import * as CryptoJS from 'crypto-js';
-import mongo from './mongo';
+import mongo from './mongo.js';
 import {UserModel, RestaurantModel} from './models/models';
 import Query from './resolvers/Query';
 import Mutation from './resolvers/Mutation';
