@@ -21,7 +21,7 @@ const pubsub = createPubSub();
 const yoga = createYoga({
   schema: createSchema({
     typeDefs: fs.readFileSync(
-      path.resolve('./schema.graphql'),
+      path.resolve('./backend/src/schema.graphql'),
       'utf-8'
     ),
     resolvers: {
