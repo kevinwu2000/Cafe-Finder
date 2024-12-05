@@ -32,6 +32,7 @@ const yoga = createYoga({
       Restaurant,
     },
   }),
+  graphqlEndpoint: '/graphql', // Default endpoint
   context: {
     UserModel, 
     RestaurantModel,
@@ -91,6 +92,7 @@ if (process.env.NODE_ENV === 'production') {
 
   app.get('*', (req, res) => {
     res.sendFile(path.join(buildPath, 'index.html'));
+    return;
   });
 
   server.on('request', app);
