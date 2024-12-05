@@ -82,13 +82,19 @@ useServer(
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Add React app serving for production
+// Serve React app in production
 if (process.env.NODE_ENV === 'production') {
+  const express = require('express');
+  const app = express();
+
   const buildPath = path.join(__dirname, '../frontend/build');
-  yoga.express.use(express.static(buildPath));
-  yoga.express.get('*', (req, res) => {
+  app.use(express.static(buildPath));
+
+  app.get('*', (req, res) => {
     res.sendFile(path.join(buildPath, 'index.html'));
   });
+
+  server.on('request', app);
 }
 
 const port = process.env.PORT || 4000;
