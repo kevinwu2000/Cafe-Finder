@@ -84,7 +84,6 @@ const __dirname = path.dirname(__filename);
 
 // Serve React app in production
 if (process.env.NODE_ENV === 'production') {
-  const express = require('express');
   const app = express();
 
   const buildPath = path.join(__dirname, '../frontend/build');
