@@ -42,6 +42,7 @@ Sign up for a new account and log in to access all website functionalities
 
 ### Prerequisites
 - Node.js
+- MongoDB
 - Yarn package manager
 
 ### Setup Steps
@@ -57,6 +58,9 @@ Sign up for a new account and log in to access all website functionalities
    yarn install
    ```
 4. Create a `.env` file in the backend folder with necessary configuration
+    ```
+    MONGO_URL=your_mongodb_connection_string
+    ```
 5. Start the application:
    ```bash
    # In the cafe-finder root directory
