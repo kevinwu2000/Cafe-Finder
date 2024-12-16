@@ -95,7 +95,11 @@ if (process.env.NODE_ENV === 'production') {
     return;
   });
 
-  server.on('request', app);
+  // Attach the app to the Yoga server
+  server.on('request', (req, res) => {
+    app(req, res); // React app
+    yoga.handleNodeRequest(req, res); // GraphQL server
+  });
 }
 
 const port = process.env.PORT || 4000;
