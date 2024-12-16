@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import * as CryptoJS from 'crypto-js';
+import CryptoJS from 'crypto-js';
 
 const secretKey = "IHVYRTyknIBUYTNTCYVUBJnnJhgfjnBHRYTusc";
 const Query = {
