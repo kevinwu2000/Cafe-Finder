@@ -19,6 +19,29 @@ mongo.connect();
 
 const pubsub = createPubSub();
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = express(); // Create an Express app
+
+// Serve React app in production
+if (process.env.NODE_ENV === 'production') {
+  const buildPath = path.join(__dirname, '../../frontend/build');
+  app.use(express.static(buildPath));
+  
+  // Serve React app for all other routes
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(buildPath, 'index.html'));
+  });
+}
+
+// Add CORS middleware
+app.use(cors({
+  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  methods: ['GET', 'POST', 'OPTIONS'],
+}));
+
+// Create Yoga instance
 const yoga = createYoga({
   schema: createSchema({
     typeDefs: fs.readFileSync(
@@ -33,10 +56,7 @@ const yoga = createYoga({
     },
   }),
   graphqlEndpoint: '/graphql',
-  cors: {
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-    methods: ['GET', 'POST', 'OPTIONS'],
-  },
+  cors: false, // Disable Yoga's internal CORS (Express handles it)
   context: {
     UserModel,
     RestaurantModel,
@@ -44,67 +64,52 @@ const yoga = createYoga({
   },
 });
 
-const server = createServer(yoga);
+// Use Yoga middleware for `/graphql` route
+app.use('/graphql', yoga);
 
+// Create HTTP server for WebSocket support
+const server = createServer(app);
+
+// WebSocket server for subscriptions
 const wsServer = new WebSocketServer({
   server,
-  path: yoga.graphqlEndpoint,
+  path: '/graphql',
 });
 
-useServer({
-  execute: (args) => args.rootValue.execute(args),
-  subscribe: (args) => args.rootValue.subscribe(args),
-  onSubscribe: async (ctx, msg) => {
-    const { schema, execute, subscribe, contextFactory, parse, validate } =
-      yoga.getEnveloped({
-        ...ctx,
-        req: ctx.extra.request,
-        socket: ctx.extra.socket,
-        params: msg.payload,
-      });
+useServer(
+  {
+    execute: (args) => args.rootValue.execute(args),
+    subscribe: (args) => args.rootValue.subscribe(args),
+    onSubscribe: async (ctx, msg) => {
+      const { schema, execute, subscribe, contextFactory, parse, validate } =
+        yoga.getEnveloped({
+          ...ctx,
+          req: ctx.extra.request,
+          socket: ctx.extra.socket,
+          params: msg.payload,
+        });
 
-    const args = {
-      schema,
-      operationName: msg.payload.operationName,
-      document: parse(msg.payload.query),
-      variableValues: msg.payload.variables,
-      contextValue: await contextFactory(),
-      rootValue: {
-        execute,
-        subscribe,
-      },
-    };
+      const args = {
+        schema,
+        operationName: msg.payload.operationName,
+        document: parse(msg.payload.query),
+        variableValues: msg.payload.variables,
+        contextValue: await contextFactory(),
+        rootValue: {
+          execute,
+          subscribe,
+        },
+      };
 
-    const errors = validate(args.schema, args.document);
-    if (errors.length) return errors;
-    return args;
+      const errors = validate(args.schema, args.document);
+      if (errors.length) return errors;
+      return args;
+    },
   },
-}, wsServer);
+  wsServer
+);
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Serve React app in production
-if (process.env.NODE_ENV === 'production') {
-  const app = express();
-
-  const buildPath = path.join(__dirname, '../../frontend/build');
-  app.use(express.static(buildPath));
-
-  // Serve React app for all other routes
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(buildPath, 'index.html'));
-  });
-
-  server.on('request', (req, res) => {
-    if (req.url.startsWith('/graphql')) {
-      yoga.handleNodeRequest(req, res);
-    } else {
-      app(req, res);
-    }
-  });
-}
-
+// Start server
 const port = process.env.PORT || 4000;
 server.listen({ port }, () => {
   console.log(`The server is up on port ${port}!`);
