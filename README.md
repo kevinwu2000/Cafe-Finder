@@ -63,9 +63,11 @@ Sign up for a new account and log in to access all website functionalities
     ```
 5. Start the application:
    ```bash
-   # In the cafe-finder root directory
+   # In the frontend directory
    yarn start     # Start frontend
-   yarn server    # Start backend
+   
+   # In the cafe-finder root directory
+   yarn start     # Start backend
    ```
 6. Access the website and create an account to explore all features
 
