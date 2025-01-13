@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/IndicatorStyle.css'; // Import the CSS file
+import '../css/HomePageStyle.css';
 
 const Home = ({ navigate }) => {
   return (
