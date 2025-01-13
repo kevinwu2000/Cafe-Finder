@@ -54,20 +54,20 @@ Sign up for a new account and log in to access all website functionalities
    ```
 3. Install backend dependencies:
    ```bash
-   cd ../backend
+   cd ../local-dev
    yarn install
    ```
-4. Create a `.env` file in the backend folder with necessary configuration
+4. Create a `.env` file in the `local-dev` folder with necessary configuration
     ```
     MONGO_URL=your_mongodb_connection_string
     ```
 5. Start the application:
    ```bash
    # In the frontend directory
-   yarn start     # Start frontend
+   yarn start     # frontend
    
    # In the cafe-finder root directory
-   yarn start     # Start backend
+   yarn start:local-dev     # backend
    ```
 6. Access the website and create an account to explore all features
 
