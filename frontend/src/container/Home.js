@@ -1,7 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../css/HomePageStyle.css';
 
-const Home = ({ navigate }) => {
+const Home = () => {
+  const navigate = useNavigate(); // Add useNavigate here
+
   return (
     <div className="home-container">
       <div className="content">
