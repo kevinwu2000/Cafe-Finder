@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import hex2rgba from '../utils/hex2rgba.js';
-import styles from '../css/IndicatorStyle.css';
+import styles from '../css/indicatorStyle.css';
 
 export default class Score extends React.Component {
   static propTypes = {
