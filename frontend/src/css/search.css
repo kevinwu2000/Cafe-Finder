@@ -1,0 +1,274 @@
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  padding: 50px 20px;
+  background: linear-gradient(to bottom, #f7d6ba, #f2c8a6);
+  color: #6f4e37;
+  box-shadow: 0 4px 20px rgba(111, 78, 55, 0.1);
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-family: 'Playfair Display', serif;
+  margin: 0;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  margin: 10px 0 20px;
+  font-style: italic;
+}
+
+/* Search Input */
+.search-box {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.search-input {
+  width: 60%;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: 2px solid #d7a981;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+}
+
+.search-button {
+  padding: 10px 20px;
+  background-color: #d7a981;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #c38d68;
+}
+
+/* Button Group */
+.button-group {
+  margin-top: 30px;
+}
+
+.btn {
+  padding: 10px 20px;
+  margin: 5px;
+  background-color: #ffbd45;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #d58d33;
+}
+
+/* Logout Button */
+.logout-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.logout-btn {
+  padding: 10px 20px;
+  background-color: #d58d33;
+  color: white;
+  border: 2px solid #d58d33; /* Add border */
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: #b57328; /* Slightly darker on hover */
+}
+
+
+/* Updated Add Cafe Section */
+.add-cafe-section {
+  width: 100%; /* Match the width of the hero section */
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+/* New Add Cafe Button */
+.add-cafe-btn {
+  width: 80%; /* Responsive width to match hero section */
+  max-width: 600px; /* Prevent it from getting too large on bigger screens */
+  height: 100px;
+  background: linear-gradient(to right, #f7a440, #d87d1c); /* Vibrant gradient */
+  border: none;
+  border-radius: 50px; /* Rounded edges for a modern look */
+  cursor: pointer;
+  color: white;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.4s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.add-cafe-btn:hover {
+  background: linear-gradient(to right, #d87d1c, #f7a440); /* Reverse gradient */
+  transform: scale(1.05); /* Slight enlargement for effect */
+}
+
+.add-cafe-btn:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  transition: all 0.4s ease-in-out;
+  transform: skewX(-20deg);
+}
+
+.add-cafe-btn:hover:before {
+  left: 100%;
+}
+
+.add-cafe-title {
+  margin: 0;
+}
+
+.add-cafe-subtitle {
+  display: none; /* Hidden for a cleaner design */
+}
+
+/* Main Content Background */
+.search-page {
+  min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    #fff8f0 0%,
+    #ffeedd 50%,
+    #fff8f0 100%
+  );
+}
+
+/* Enhanced Card Container */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+  padding: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: linear-gradient(
+    135deg,
+    #fff8f0 0%,
+    #ffeedd 50%,
+    #fff8f0 100%
+  );
+  backdrop-filter: blur(10px);
+}
+
+/* Enhanced Cafe Card */
+.cafe-card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(111, 78, 55, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 280px;
+}
+
+.cafe-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(111, 78, 55, 0.2);
+}
+
+.cafe-card-image {
+  background: linear-gradient(135deg, #d7a981, #c38d68);
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cafe-icon {
+  color: white;
+}
+
+.cafe-card-content {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cafe-card-title {
+  color: #6f4e37;
+  font-size: 1.5rem;
+  margin: 0;
+  font-weight: 600;
+  text-align: center;
+}
+
+.cafe-card-divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #d7a981, transparent);
+  margin: 15px 0;
+}
+
+.cafe-card-details {
+  flex-grow: 1;
+  margin-bottom: 15px;
+}
+
+.cafe-card-description {
+  color: #666;
+  font-size: 0.95rem;
+  margin: 10px 0;
+  line-height: 1.4;
+}
+
+.cafe-card-address {
+  color: #888;
+  font-size: 0.9rem;
+  margin: 5px 0;
+}
+
+.cafe-card-rating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-top: 1px solid #eee;
+}
+
+.cafe-card-rating-stars {
+  color: #ffbd45;
+}
+
+.cafe-card-rating-number {
+  color: #6f4e37;
+  font-weight: 500;
+}

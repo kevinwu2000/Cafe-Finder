@@ -1,46 +1,22 @@
-import * as React from 'react';
-import Paper from '@mui/material/Paper';
-import InputBase from '@mui/material/InputBase';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
-import DirectionsIcon from '@mui/icons-material/Directions';
+import React from 'react';
+import '../css/search.css';
 
-const SearchBox = {
-	position : 'absolute',
-	width : '60%',
-	height : '8%',
-	top : '25%',
-	left : '20%',
-	right : '25%',
+function SearchInput({ value, onChange, onClick, onKeyPress }) {
+  return (
+    <div className="search-box">
+      <input
+        className="search-input"
+        type="text"
+        placeholder="Search for cafe"
+        value={value}
+        onChange={onChange}
+        onKeyPress={onKeyPress}
+      />
+      <button className="search-button" onClick={onClick}>
+        Search
+      </button>
+    </div>
+  );
 }
 
-export default function CustomizedInputBase(props) {
-    //console.log(props)
-    return (
-        <Paper
-            component="form"
-            sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }}
-            style={SearchBox}
-        >
-            <IconButton sx={{ p: '10px' }} aria-label="menu">
-                {/* <MenuIcon /> */}
-                    </IconButton>
-                    <InputBase
-                    sx={{ ml: 1, flex: 1 }}
-                    placeholder="Search for Café"
-                    inputProps={{ 'aria-label': 'Search for Café' }}
-                    value = {props.value}
-                    onChange = {props.onChange}
-                    />
-                <IconButton type="button" sx={{ p: '10px' }} aria-label="search" onClick={props.onClick}>
-                    <SearchIcon />
-                </IconButton>
-                {/* <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" /> */}
-                <IconButton color="primary" sx={{ p: '10px' }} aria-label="directions">
-                {/* <DirectionsIcon /> */}
-            </IconButton>
-        </Paper>
-    );
-}
+export default SearchInput;

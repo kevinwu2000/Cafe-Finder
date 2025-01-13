@@ -1,234 +1,99 @@
-import * as React from 'react';
-import styled from 'styled-components'
-import { Input} from 'antd';
-import { ShopOutlined, PlusOutlined, LogoutOutlined } from "@ant-design/icons";
-import AppBar from '@mui/material/AppBar';
-import Button from '@mui/material/Button';
-import LocalCafeIcon from '@mui/icons-material/LocalCafe';
-import SearchIcon from '@mui/icons-material/Search';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import CssBaseline from '@mui/material/CssBaseline';
-import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import TextField, { TextFieldProps } from '@mui/material/TextField';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import SearchInput from '../component/SearchInput';
-import {useHooks} from './hooks/Hooks'
-import {SEARCH_RESTAURANT_BY_NAME_QUERY, GET_RESTAURANT_BY_ID_QUERY} from '../graphql/index';
-import { useQuery, useLazyQuery, gql, useMutation } from "@apollo/client";
-// import {ScrollView, ImageBackground } from 'react-native-web';
-import { useParams } from 'react-router-dom'
-import { useWindowSize } from 'react-use';
-import searchCafe from '../picture/searchCafe.jpg'
-import Rating from '@mui/material/Rating';
-
-
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-const theme = createTheme();
+import CafeCard from '../component/CafeCard';
+import { useHooks } from './hooks/Hooks';
+import { useLazyQuery } from '@apollo/client';
+import { SEARCH_RESTAURANT_BY_NAME_QUERY, GET_RESTAURANT_BY_ID_QUERY } from '../graphql/index';
+import '../css/search.css';
 
 function Search() {
-	const navigate = useNavigate();
-	const {name, userid } = useParams()
-	const [searchValue, setSearchValue] = React.useState('');
-	const [restaurantlist, setRestaurantlist] = React.useState([]);
-	const {user, setUser, restaurant, setRestaurant} = useHooks();
-	const { width, height } = useWindowSize();
-	// console.log(width,height)
+  const navigate = useNavigate();
+  const { name, userid } = useParams();
+  const [searchValue, setSearchValue] = useState('');
+  const [restaurantList, setRestaurantList] = useState([]);
+  const { setRestaurant } = useHooks();
 
-	const AddButton = {
-		position : 'absolute',
-		// width : `${width / 165}%`,
-		// height : `${height / 120}%`,
-		// fontSize : `${ 1.9 * height / width }rem`,
-		top : '5%',
-		right : '15%',
-		backgroundColor:'#DB8F00'
-	}
-	
-	const LogoutButton = {
-		position : 'absolute',
-		// width : `${width / 165}%`,
-		// height : `${height / 120}%`,
-		// fontSize : `${ 1.9 * height / width }rem`,
-		top : '5%',
-		right : '5%',
-		backgroundColor:'#DB8F00',
-	}
+  const [SearchRestaurant, { data: SearchRestaurantData }] = useLazyQuery(SEARCH_RESTAURANT_BY_NAME_QUERY);
+  const [GetRestaurant, { data: GetRestaurantData }] = useLazyQuery(GET_RESTAURANT_BY_ID_QUERY);
 
-	//const [createuser] = useMutation(CREATE_USER_MUTATION);
-	const [
-		SearchRestaurant,
-		{ data: SearchRestaurantData, error: SearchRestaurantError, loading: SearchRestaurantLoading},
-	] = useLazyQuery(SEARCH_RESTAURANT_BY_NAME_QUERY);
+  useEffect(() => {
+    if (SearchRestaurantData) {
+      setRestaurantList(SearchRestaurantData.SearchRestaurantByName);
+    }
+  }, [SearchRestaurantData]);
 
-	const [
-		GetRestaurant,
-		{ data: GetRestaurantData, error: GetRestaurantError, loading: GetRestaurantLoading},
-	] = useLazyQuery(GET_RESTAURANT_BY_ID_QUERY);
+  useEffect(() => {
+    if (GetRestaurantData?.GetRestaurantById) {
+      setRestaurant(GetRestaurantData.GetRestaurantById);
+      navigate(`/search/${name}/${userid}/cafe/${GetRestaurantData.GetRestaurantById.id}`);
+    }
+  }, [GetRestaurantData]);
 
-	React.useEffect((SearchRestaurantLoading)=>{
-		//console.log(SearchRestaurantLoading,SearchRestaurantData,SearchRestaurantError);
-        if(SearchRestaurantData !== undefined){
-			//console.log(SearchRestaurantData.SearchRestaurantByName)
-			setRestaurantlist(SearchRestaurantData.SearchRestaurantByName)
-		}
-    },[SearchRestaurantLoading])
+  useEffect(() => {
+    // Automatically search when the component is mounted
+    handleSearch();
+  }, []);  
 
-	React.useEffect((GetRestaurantLoading)=>{
-		//console.log(GetRestaurantLoading,GetRestaurantData,GetRestaurantError);
-        if(GetRestaurantData !== undefined && GetRestaurantData.GetRestaurantById !== undefined){
-			console.log(GetRestaurantData.GetRestaurantById)
-			setRestaurant(GetRestaurantData.GetRestaurantById)
-			navigate('/search/'+name+'/'+userid+'/cafe/' + GetRestaurantData.GetRestaurantById.id)
-		}
-    },[GetRestaurantLoading])
+  const handleSearch = () => {
+    const query = searchValue.trim() === '' ? '' : searchValue;
+    SearchRestaurant({ variables: { name: query } });
+  };  
 
-	const handleChange = (event) => {
-		setSearchValue(event.target.value);
-	};
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleSearch();
+    }
+  };
 
-	const handleonClick = () => {
-		SearchRestaurant({
-			variables:{
-				name: searchValue
-			},
-		})
-	}
+  const handleCardClick = (id) => {
+    GetRestaurant({ variables: { id } });
+  };
 
-	const handleCardonClick = (id) => {
-		GetRestaurant({
-			variables:{
-				id: id
-			},
-		})
-	}
+  return (
+    <div className="search-page">
+      <div className="logout-container">
+        <button className="logout-btn" onClick={() => navigate('/')}>
+          Log Out
+        </button>
+      </div>
+      <section className="hero-section">
+        <h1 className="hero-title">Find Your Perfect Cafe</h1>
+        <p className="hero-subtitle">Search and explore cozy cafes!</p>
+        <SearchInput
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+          onKeyPress={handleKeyPress}
+          onClick={handleSearch}
+        />
+        <div className="add-cafe-section">
+          <button className="add-cafe-btn" onClick={() => navigate(`/addcafe/${name}/${userid}`)}>
+            <div className="add-cafe-content">
+              <p className="add-cafe-title">Add Your Favorite Cafe</p>
+              <p className="add-cafe-subtitle">Share a hidden gem with others</p>
+            </div>
+          </button>
+        </div>
+      </section>
 
-
-	return (
-		// <Box
-		// sx={{
-			// bgcolor: 'background.paper',
-		// 	bgcolor: 'gray',
-		// 	pt: width,
-		// 	pb: height,
-		// }}
-		
-		// >
-		<ThemeProvider theme={theme}>
-			<CssBaseline />
-			
-			<AppBar position="relative">
-				<Toolbar style={{backgroundColor:"#FFBD45", height:'15vh'}}>
-					<LocalCafeIcon sx={{ mr: 2 }} />
-					<Typography variant="h4" color="inherit" noWrap>
-						Café Finder
-					</Typography>
-
-					
-				</Toolbar>
-			</AppBar>
-
-			
-			<main>
-			<Box
-				sx={{
-					// bgcolor: 'background.paper',
-					// bgcolor: 'gray',
-					pt: 8,
-					pb: 6,
-				}}
-				// style={{backgroundColor:'gray'}}
-			>
-			<Container maxWidth="sm">
-
-				<SearchInput
-					// style={SearchBox}
-					value={searchValue}
-					onChange={handleChange}
-					onClick={handleonClick}
-				/>
-
-				<Button variant="contained" size='large'
-					style={AddButton}
-					onClick={() => {navigate('/addcafe/'+name+'/'+userid)}}
-				>
-							Add Café
-				</Button>
-				
-				
-				<Button variant="contained" size='large' 
-					style={LogoutButton}
-					onClick={() => {navigate('/')}}
-				>
-					Log Out
-				</Button>
-
-				<Stack
-					sx={{ pt: 4 }}
-					direction="row"
-					spacing={2}
-					justifyContent="center"
-					// style={{backgroundColor:'gray'}}
-				>
-				</Stack>
-
-			</Container>
-			</Box>
-
-			<Container sx={{ py: 8 }} maxWidth="md">
-			{/* End hero unit */}
-				<Grid container spacing={4}>
-				{restaurantlist.map((rest) => {
-					let tmp = 0.0;
-					for(let i=0;i<rest.comments.length;i++)tmp += rest.comments[i].star
-					tmp /= rest.comments.length
-					tmp = tmp.toFixed(2);
-					if(tmp == NaN)tmp = 0
-					return<Grid item key={rest.id} xs={12} sm={6} md={4} onClick={()=>{handleCardonClick(rest.id)}}>
-					<Card
-					sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-					>
-						<CardMedia
-							component="img"
-							sx={{
-							// 16:9
-							pt: '56.25%',
-							}}
-							image={searchCafe}
-							alt="random"
-						/>
-						<CardContent sx={{ flexGrow: 1 }}>
-							<Typography gutterBottom variant="h5" component="h2">
-								{rest.name}
-							</Typography>
-
-							<Rating name="read-only" value={tmp} precision={0.1} readOnly sx={{padding:1}}/>
-						</CardContent>
-						<CardActions>
-							{/* <Button size="small">View</Button> */}
-							{/* <Button size="small">Edit</Button> */}
-						</CardActions>
-					</Card>
-				</Grid>
-				})}
-				</Grid>
-			</Container>
-			{/* </Box> */}
-			</main>
-			
-		</ThemeProvider>
-		// </Box>
-	);
+      <section className="card-container">
+        {restaurantList.map((rest) => {
+          const avgRating = (
+            rest.comments.reduce((sum, c) => sum + c.star, 0) / rest.comments.length || 0
+          ).toFixed(1);
+          return (
+            <CafeCard
+              key={rest.id}
+              name={rest.name}
+              rating={avgRating}
+              onClick={() => handleCardClick(rest.id)}
+            />
+          );
+        })}
+      </section>
+    </div>
+  );
 }
 
 export default Search;
-
