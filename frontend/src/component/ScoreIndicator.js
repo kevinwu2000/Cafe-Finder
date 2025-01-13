@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // components
 import Score from './Score';
-import styles from '../css/indicatorStyle.css';
+import styles from '../css/indicator.css';
 
 const DEFAULT_STEP_COLORS = [
   '#d12000',

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Range from './Range';
-import styles from '../css/indicatorStyle.css';
+import styles from '../css/indicator.css';
 
 export default class Score extends React.PureComponent {
   static propTypes = {
