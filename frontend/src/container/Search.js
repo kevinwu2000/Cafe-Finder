@@ -82,11 +82,14 @@ function Search() {
           const avgRating = (
             rest.comments.reduce((sum, c) => sum + c.star, 0) / rest.comments.length || 0
           ).toFixed(1);
+          const addressObj = rest.information?.find(info => info.name === 'Address');
+          const address = addressObj ? addressObj.body : 'Address not available';
           return (
             <CafeCard
               key={rest.id}
               name={rest.name}
               rating={avgRating}
+              address={address}
               onClick={() => handleCardClick(rest.id)}
             />
           );

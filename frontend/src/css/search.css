@@ -7,7 +7,7 @@ body, html {
 .hero-section {
   text-align: center;
   padding: 50px 20px;
-  background: linear-gradient(to bottom, #f7d6ba, #f2c8a6);
+  background: linear-gradient(to bottom, #f7d6ba, #f1ab72);
   color: #6f4e37;
   box-shadow: 0 4px 20px rgba(111, 78, 55, 0.1);
 }
@@ -83,9 +83,9 @@ body, html {
 
 .logout-btn {
   padding: 10px 20px;
-  background-color: #d58d33;
+  background-color: #373431;
   color: white;
-  border: 2px solid #d58d33; /* Add border */
+  border: 2px solid #a6a5a4; /* Add border */
   border-radius: 5px;
   font-size: 1rem;
   font-weight: bold;
@@ -111,7 +111,7 @@ body, html {
   width: 80%; /* Responsive width to match hero section */
   max-width: 600px; /* Prevent it from getting too large on bigger screens */
   height: 100px;
-  background: linear-gradient(to right, #f7a440, #d87d1c); /* Vibrant gradient */
+  background: linear-gradient(to left, #743804, #d58a08); /* Vibrant gradient */
   border: none;
   border-radius: 50px; /* Rounded edges for a modern look */
   cursor: pointer;
@@ -158,17 +158,6 @@ body, html {
   display: none; /* Hidden for a cleaner design */
 }
 
-/* Main Content Background */
-.search-page {
-  min-height: 100vh;
-  background: linear-gradient(
-    135deg,
-    #fff8f0 0%,
-    #ffeedd 50%,
-    #fff8f0 100%
-  );
-}
-
 /* Enhanced Card Container */
 .card-container {
   display: grid;
@@ -180,8 +169,8 @@ body, html {
   background: linear-gradient(
     135deg,
     #fff8f0 0%,
-    #ffeedd 50%,
-    #fff8f0 100%
+    #e7dacd 50%,
+    #f6c493 100%
   );
   backdrop-filter: blur(10px);
 }
@@ -216,35 +205,15 @@ body, html {
   color: white;
 }
 
-.cafe-card-content {
-  padding: 20px;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.cafe-card-title {
-  color: #6f4e37;
-  font-size: 1.5rem;
-  margin: 0;
-  font-weight: 600;
-  text-align: center;
-}
-
 .cafe-card-divider {
   height: 2px;
   background: linear-gradient(90deg, transparent, #d7a981, transparent);
   margin: 15px 0;
 }
 
-.cafe-card-details {
-  flex-grow: 1;
-  margin-bottom: 15px;
-}
-
 .cafe-card-description {
   color: #666;
-  font-size: 0.95rem;
+  font-size: 1.2rem;
   margin: 10px 0;
   line-height: 1.4;
 }
@@ -260,15 +229,43 @@ body, html {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 10px 0;
-  border-top: 1px solid #eee;
-}
-
-.cafe-card-rating-stars {
-  color: #ffbd45;
+  margin: 10px 0; /* Add spacing above and below the rating section */
+  font-size: 1.5rem;
 }
 
 .cafe-card-rating-number {
+  color: #4b4747;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.cafe-card-title {
   color: #6f4e37;
-  font-weight: 500;
+  font-size: 1.5rem;
+  margin: 0;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 10px; /* Add space below the title */
+}
+
+.cafe-card-content {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Push address to the bottom */
+}
+
+.cafe-card-details {
+  flex-grow: 1;
+  margin-bottom: 15px;
+}
+
+.cafe-card-address {
+  color: #888;
+  font-size: 0.85rem; /* Smaller font size */
+  margin-top: auto; /* Push the address to the bottom of the card */
+  text-align: center; /* Center align the address */
+  padding-top: 10px; /* Add spacing above the address */
+  border-top: 1px solid #eee; /* Optional divider line */
 }
