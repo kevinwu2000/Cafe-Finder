@@ -25,9 +25,9 @@ function NavBar({cafename, name, id, userid}){
     return(
         <ThemeProvider theme={theme}>
             <CssBaseline />
-                <Container maxWidth="lg">
-                    <Header title={cafename} sections={sections} name={name} userid={userid}></Header>
-                </Container>
+            <Container maxWidth="lg" style={{ textAlign: 'center' }}>
+                <Header title={cafename} sections={sections} name={name} userid={userid} />
+            </Container>
         </ThemeProvider>
     )
 }

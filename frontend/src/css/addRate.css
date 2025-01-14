@@ -1,0 +1,529 @@
+/* Base Variables */
+:root {
+    --primary-gradient: linear-gradient(135deg, #8B4513 0%, #6B4423 100%);
+    --success-gradient: linear-gradient(135deg, #43A047 0%, #2E7D32 100%);
+    --error-gradient: linear-gradient(135deg, #E53935 0%, #C62828 100%);
+    --warm-bg: linear-gradient(135deg, #FFF8DC 0%, #FFE4B5 100%);
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Card Base Styles */
+.review-card {
+    background: var(--warm-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease;
+    min-height: 120px;
+    padding: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.review-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23D2691E' fill-opacity='0.05' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.5;
+}
+
+.review-card:hover {
+    transform: translateY(-4px);
+}
+
+.card-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 1rem;
+    z-index: 1;
+}
+
+.review-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #5D4037;
+    text-align: center;
+    margin: 0;
+}
+
+/* Rating Card Specific */
+.rating-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.score-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #8B4513;
+    order: -1; /* Move score to the left */
+}
+
+/* Decorative elements */
+.corner-decoration {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    opacity: 0.1;
+}
+
+.top-left {
+    top: 10px;
+    left: 10px;
+    border-left: 3px solid #8B4513;
+    border-top: 3px solid #8B4513;
+}
+
+.bottom-right {
+    bottom: 10px;
+    right: 10px;
+    border-right: 3px solid #8B4513;
+    border-bottom: 3px solid #8B4513;
+}
+
+/* True/False Card Specific */
+.tf-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 0.5rem;
+}
+
+.tf-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    position: relative;
+}
+
+.tf-icon.true {
+    font-size: 2.5rem;
+    color: #2E7D32;
+}
+
+.tf-icon.false {
+    font-size: 2.5rem;
+    color: #C62828;
+}
+
+.tf-count {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #5D4037;
+}
+
+
+.main-button {
+    margin-top: 16px;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .main-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .secondary-button {
+    padding: 8px 16px;
+    background-color: #ccc;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .secondary-button:hover {
+    background-color: #aaa;
+  }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .review-title {
+    font-size: 1.2rem;
+    }
+    
+    .tf-icon.true,
+    .tf-icon.false {
+    font-size: 2rem;
+    }
+    
+    .tf-count {
+    font-size: 1rem;
+    }
+}
+
+/* Page Layout */
+.rate-page {
+    min-height: 100vh;
+    background-color: #FDF5E6;
+}
+
+/* Header Styles */
+.rate-header {
+    background: var(--primary-gradient);
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.rate-header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-title {
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-button {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.header-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Main Content */
+.rate-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.page-title {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.rate-section {
+    margin: 3rem 0;
+}
+
+.section-title {
+    color: var(--text-color);
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Loading State */
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+}
+
+/* Button Styles */
+.review-button {
+    background: var(--primary-gradient);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    text-align: center;
+}
+
+.review-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(139, 69, 19, 0.2);
+}
+
+.review-button.add {
+    background: var(--success-gradient);
+}
+
+/* Finish Button */
+.finish-button-container {
+    display: flex;
+    justify-content: center;
+    margin: 3rem 0;
+}
+
+.finish-button {
+    background: var(--primary-gradient);
+    color: white;
+    border: none;
+    padding: 1rem 3rem;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px rgba(139, 69, 19, 0.2);
+}
+
+.finish-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(139, 69, 19, 0.3);
+}
+
+/* Dialog Button Styles */
+.dialog-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.dialog-button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.dialog-button.primary {
+    background: var(--primary-gradient);
+    color: white;
+    border: none;
+}
+
+.dialog-button.secondary {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.dialog-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .rate-header {
+    padding: 1rem;
+    }
+
+    .header-title {
+    font-size: 1.5rem;
+    }
+
+    .page-title {
+    font-size: 2rem;
+    }
+
+    .section-title {
+    font-size: 1.5rem;
+    }
+
+    .cards-grid {
+    grid-template-columns: 1fr;
+    }
+
+    .rate-content {
+    padding: 1rem;
+    }
+}
+
+/* Add New Rate/TF Rate Button Card Specific Styles */
+.review-card.add-card {
+    background: var(--warm-bg);
+    border: 2px dashed var(--primary-gradient);
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.review-card.add-card:hover {
+    transform: translateY(-4px);
+    background-color: #fff7e6;
+}
+
+/* Dialog Styles */
+.review-dialog .dialog-content {
+    padding: 2rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+}
+
+.dialog-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.dialog-subtitle {
+    font-size: 1.2rem;
+    color: #5D4037;
+    margin-bottom: 1rem;
+}
+
+.dialog-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    transition: border-color 0.2s ease;
+}
+
+.dialog-input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+/* Dialog Buttons */
+.dialog-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.dialog-button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1rem;
+}
+
+.dialog-button.primary {
+    background: var(--primary-gradient);
+    color: white;
+    border: none;
+}
+
+.dialog-button.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dialog-button.secondary {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.dialog-button.secondary:hover {
+    transform: translateY(-2px);
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .review-dialog .dialog-content {
+        padding: 1.5rem;
+    }
+
+    .dialog-title {
+        font-size: 1.5rem;
+    }
+
+    .dialog-subtitle {
+        font-size: 1rem;
+    }
+
+    .dialog-button {
+        font-size: 0.9rem;
+    }
+}
+
+/* Dialog Styles */
+.dialog .dialog-content {
+    padding: 2rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+}
+
+.dialog-options {
+    display: flex;
+    justify-content: space-around;
+    margin: 1.5rem 0;
+}
+
+.dialog-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    color: #5D4037;
+    cursor: pointer;
+}
+
+.dialog-option input {
+    cursor: pointer;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .review-card {
+        padding: 1rem;
+    }
+
+    .review-title {
+        font-size: 1.2rem;
+    }
+
+    .dialog .dialog-content {
+        padding: 1.5rem;
+    }
+
+    .main-button, .secondary-button {
+        font-size: 0.9rem;
+    }
+}
