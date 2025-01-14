@@ -55,7 +55,7 @@ function Search() {
     <div className="search-page">
       <div className="logout-container">
         <button className="logout-btn" onClick={() => navigate('/')}>
-          Log Out
+          Sign Out
         </button>
       </div>
       <section className="hero-section">
