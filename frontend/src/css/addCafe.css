@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to bottom, #FFFDE7, #FFECB3);
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.MuiPaper-root {
+    background: linear-gradient(to bottom, #FFF8E1, #FFF3E0);
+}
+
+.MuiButton-contained {
+    background: #FB8C00;
+    color: white;
+    font-weight: bold;
+    text-transform: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.MuiButton-contained:hover {
+    background: #FF9800;
+}
