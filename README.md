@@ -1,5 +1,8 @@
 # Cafe Finder
 
+## Deployment Link
+https://cafe-finder-c0ys.onrender.com
+
 ## Description
 Cafe Finder is a social network-style cafe review website that allows users to discover, review, and share their experiences with various cafes. After logging in, users can:
 - Add new cafes for review
@@ -13,9 +16,6 @@ The website provides a comprehensive cafe review experience with four main secti
 2. User-defined rating categories
 3. Detailed comment section
 4. 2D floor plan visualization
-
-## Deployment Link
-https://cafe-finder-c0ys.onrender.com
 
 ## Getting Started
 Sign up for a new account and log in to access all website functionalities
