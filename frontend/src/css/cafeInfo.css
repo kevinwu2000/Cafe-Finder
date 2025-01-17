@@ -1,0 +1,156 @@
+:root {
+    --primary-color: #2d3436;
+    --secondary-color: #636e72;
+    --accent-color: #efbc89;
+    --accent-color2:#6361e0;
+    --border-color: #bfb3ad;
+    --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --border-radius: 12px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+}
+
+/* Main container styles */
+.cafe-info-container {
+    padding: var(--spacing-lg);
+}
+
+/* Info Grid Layout - 2 cards per line */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+    margin: var(--spacing-lg) 0;
+}
+
+/* Basic Info Card */
+.info-card {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+}
+
+.info-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.info-card-content {
+    padding: var(--spacing-lg);
+}
+
+.info-card-title {
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    font-weight: 550;
+    margin-bottom: var(--spacing-md);
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: var(--spacing-sm);
+}
+
+.info-card-description {
+    color: var(--secondary-color);
+    font-size: 1.25rem;
+    line-height: 1.5;
+}
+
+/* Day Card - distinct design */
+.day-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+.day-card {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    margin-bottom: var(--spacing-md);
+    border-left: 2px solid var(--border-color);
+}
+
+.day-card-content {
+    padding: var(--spacing-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.day-card-left {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.day-name {
+    color: var(--primary-color);
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+.time-container {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    background-color: #f8f9fa;
+    padding: 8px 16px;
+    border-radius: 20px;
+}
+
+.time-icon {
+    color: var(--accent-color2);
+}
+
+.time-text {
+    color: var(--secondary-color);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .cafe-info-container {
+    padding: var(--spacing-md);
+    }
+
+    .info-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+    }
+
+    .info-card-content,
+    .day-card-content {
+    padding: var(--spacing-md);
+    }
+
+    .info-card-title,
+    .day-name {
+    font-size: 1.1rem;
+    }
+
+    .info-card-description,
+    .time-text {
+    font-size: 0.9rem;
+    }
+
+    .day-card-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    }
+}
+
+@media (max-width: 480px) {
+    .cafe-info-container {
+    padding: var(--spacing-sm);
+    }
+
+    .day-cards-container {
+    grid-template-columns: 1fr;
+    }
+}
