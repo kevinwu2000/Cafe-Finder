@@ -11,11 +11,6 @@
     --spacing-lg: 24px;
 }
 
-/* Main container styles */
-.cafe-info-container {
-    padding: var(--spacing-lg);
-}
-
 /* Info Grid Layout - 2 cards per line */
 .info-grid {
     display: grid;
