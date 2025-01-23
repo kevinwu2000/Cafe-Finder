@@ -67,7 +67,7 @@ const RestaurantSchema = new Schema({
   }],
   information: [{
     name: { type: String ,required:[true, 'Name field is required.']},
-    body: { type: String ,required:[true, 'body field is required.']},
+    body: { type: String },
   }],
   sprate: [{
     name: { type: String ,required:[true, 'Name field is required.']},
