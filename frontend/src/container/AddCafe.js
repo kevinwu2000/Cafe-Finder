@@ -40,20 +40,20 @@ function AddCafe() {
   const [district, setDistrict] = useState('');
   const [address, setAddress] = useState('');
   const [businessHour, setBusinessHour] = useState([
-    { name: 'Monday_Open', body: '07:30' },
-    { name: 'Monday_Close', body: '07:30' },
-    { name: 'Tuesday_Open', body: '07:30' },
-    { name: 'Tuesday_Close', body: '07:30' },
-    { name: 'Wednesday_Open', body: '07:30' },
-    { name: 'Wednesday_Close', body: '07:30' },
-    { name: 'Thursday_Open', body: '07:30' },
-    { name: 'Thursday_Close', body: '07:30' },
-    { name: 'Friday_Open', body: '07:30' },
-    { name: 'Friday_Close', body: '07:30' },
-    { name: 'Saturday_Open', body: '07:30' },
-    { name: 'Saturday_Close', body: '07:30' },
-    { name: 'Sunday_Open', body: '07:30' },
-    { name: 'Sunday_Close', body: '07:30' },
+    { name: 'Monday_Open', body: '09:00' },
+    { name: 'Monday_Close', body: '21:00' },
+    { name: 'Tuesday_Open', body: '09:00' },
+    { name: 'Tuesday_Close', body: '21:00' },
+    { name: 'Wednesday_Open', body: '09:00' },
+    { name: 'Wednesday_Close', body: '21:00' },
+    { name: 'Thursday_Open', body: '09:00' },
+    { name: 'Thursday_Close', body: '21:00' },
+    { name: 'Friday_Open', body: '09:00' },
+    { name: 'Friday_Close', body: '21:00' },
+    { name: 'Saturday_Open', body: '09:00' },
+    { name: 'Saturday_Close', body: '21:00' },
+    { name: 'Sunday_Open', body: '09:00' },
+    { name: 'Sunday_Close', body: '21:00' },
   ]);
 
   const [createrestaurant] = useMutation(CREATE_RESTAURANT_MUTATION);
